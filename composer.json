@@ -1,0 +1,15 @@
+{
+    "name": "tkweb/api",
+    "description": "TKWeb Web API",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aderbal Nunes",
+            "email": "aderbal@zenitetecnologia.com.br"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^5.0"
+    }
+}
