@@ -81,6 +81,8 @@ public function __construct($request, $origin) {
   ...
 }
 ```
+![Using new controller](https://i.postimg.cc/wvG0xBkL/api-books.png)
+
 ## Get Authorization Token
 
 The requests are made based on the token, the token contains the authenticated user information and the expiration expiration date. The Authenticate header is required for every request. 
