@@ -93,5 +93,5 @@ Sample of send autentication using Postman.
 ![Auth](https://i.postimg.cc/mr5jbqmn/api-auth.png)
 
 ## Reference
-https://jwt.io/
-http://coreymaynard.com/blog/creating-a-restful-api-with-php/
+* https://jwt.io/
+* http://coreymaynard.com/blog/creating-a-restful-api-with-php/
