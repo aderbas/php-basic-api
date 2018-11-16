@@ -81,11 +81,11 @@ public function __construct($request, $origin) {
   ...
 }
 ```
-## Get Autehticate Token
+## Get Authorization Token
 
 The requests are made based on the token, the token contains the authenticated user information and the expiration expiration date. The Authenticate header is required for every request. 
 
-`Authenticate: Bearer <token>`
+`Authorization: Bearer <token>`
 
 As a plus, the methodology of sending the password via post is in an encapsulated way. You will have to create the hash to send to api. The hash is created by method: md5( md5(nonce) + md5(client-password) ) + nonce. Nonce is a string with 32 characters. To use your own authentication method, simply, edit the 'auth()' method in the file: core/controller/UserController.php.
 
