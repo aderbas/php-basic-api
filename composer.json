@@ -1,6 +1,6 @@
 {
-    "name": "tkweb/api",
-    "description": "TKWeb Web API",
+    "name": "phpbasic/api",
+    "description": "PHP Basic API",
     "type": "project",
     "license": "MIT",
     "authors": [
