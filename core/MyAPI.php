@@ -20,14 +20,15 @@ class MyAPI extends API{
   public function __construct($request, $origin) {
     parent::__construct($request);
     // config file
-    $this->config = parse_ini_file('config.ini', true);
+    $config = parse_ini_file('config.ini', true);
+    $this->config = json_decode(json_encode($config));
     
     if(!$this->validateRequest("/$request")){
       throw new \Exception('Invalid User Token');
     }
     // Database
     try{
-      $this->db = Database::getInstance($this->config['database']);
+      $this->db = Database::getInstance($this->config->database);
     }catch(\Exception $e){
       throw $e;
     }
@@ -40,7 +41,7 @@ class MyAPI extends API{
    */
   protected function version() {
     if ($this->method == 'GET') {
-      return array("label" => "MyAPI REST API", "version" => "0.1.5");
+      return array("label" => "MyAPI REST API", "version" => $this->config->version->name);
     } else {
       return "Only accepts GET requests";
     }
@@ -54,8 +55,19 @@ class MyAPI extends API{
       "user" => $user,
       "exp" => strtotime(date("Y-m-d", mktime()) . " + 5 day")
     );
-    return JWT::encode($token, $this->config['key']['token']);
+    return JWT::encode($token, $this->config->key->token);
   }
+  
+  /**
+   * Get config params
+   */
+  public function getConfig($config, $key=null){
+    if(!empty($this->config->$config)){
+      return is_null($key)?$this->config->$config:$this->config->$config->$key;
+    }else{
+      return null;
+    }
+  }  
 
   /**
    * Validate request
@@ -66,7 +78,7 @@ class MyAPI extends API{
       $headers = apache_request_headers();
       if(array_key_exists('Authorization', $headers)){
         try{
-          $decoded = JWT::decode(trim(str_replace('Bearer', '', $headers['Authorization'])), $this->config['key']['token'], array('HS256'));
+          $decoded = JWT::decode(trim(str_replace('Bearer', '', $headers['Authorization'])), $this->config->key->token, array('HS256'));
           $this->user = $decoded->user; 
         }catch(\Exception $e){
           //error_log($e->getMessage());
