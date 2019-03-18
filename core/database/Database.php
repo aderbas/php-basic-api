@@ -43,7 +43,7 @@ private $_select;
  */
 public function __construct($params = null){
   if(!is_null($params))
-    $this->registry($params);
+    $this->registry((array)$params);
 }
 
 /**
